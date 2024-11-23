@@ -11,27 +11,49 @@ The objective of this project is to perform ONT (Oxford Nanopore Technologies) d
 # Dry Lab/ GalaxyTrakr analysis
 
 
-### 1. Create a new history/ workspace
-+ Log into GalaxyTrakr, "Upload Data" or Click "Share Data" & "Data Libraries"
+### 1. Create a new history/workspace
++ Log into GalaxyTrakr, "Upload Data" or Click "Share Data" & "Data Libraries."
 
-+ If the data was shared with you you can search for it using the search bar. Select all of the baracodes that you want to upload and "Export to History" as a "Datasets" (You are uploading Fast.q files)
++ If the data was shared with you, you can search for it using the search bar. Select all of the barcodes that you want to upload and "Export to History" as "Datasets" (You are uploading Fastq files).
+  
+### 2. Filter long reads by quality
++ Tool: Filtlong (Source: https://github.com/rrwick/Filtlong). This tool is used to remove the worst 5% of reads and reads below 1000 bp and to downsample the reads to ~100X coverage of the genome (e.g., if 6 Mb, then downsample to 600 Mb).
++ Input Fastq files using a single dataset for multiple datasets.
++ Navigate to Output thresholds and enter, for example: "600000000" for Total bases, and "95" for Keep percentage (to keep 95% of the data; however, it is common to do 90%, which means you are discarding 10% of the data), and "1000" for Min. length (keeping any reads above 1,000 bp only).
++ Theoretically, you should use the estimated size for your organism. If your coverage is 65X, it will not be affected.
 
-### 2. Filter long reads by quality. 
-+ Tool: Filtlong (Source: https://github.com/rrwick/Filtlong) This Tool is to Remove the worst 5% reads and reads below 1000bp  and to downsample the reads to ~100X coverage of the genome. (Ex: if 6 Mb then down sample to 600Mb)
-+ Input Fastq files using single dataset for multiple datasets
-+ Navigate to Output thresholds and enter in, for example:  "600000000" for Total bases an "95" for Keep percentage (to keep 95 percentage of the data, but it is commone to do 90 percent also, which means you are throwing away 10 percentage of data) and "1000" for Min. length (keeping any reads that is above 1,000 only).
-+ Theoretically you should use the estimate size for your organism. And if your cover is 65X, it will not be affected
+  
+### 3. De novo assembler for single-molecule sequencing reads
++ Tool: Flye (Sources: https://www.pnas.org/doi/full/10.1073/pnas.1604560113, https://github.com/mikolmogorov/Flye). This tool is used to select parameters for high-quality ONT reads and additional polishing iterations.
++ Input Fastq files.
++ Navigate to Mode and enter "Nano HQ (--nano-hq)" and for Number of polishing iterations, enter "4."
++ Tool's output: This will generate 4 different output files: Assembly info (general info such as how many contigs you have in total, length, etc.), Graphical fragment assembly (similar to Bandage, with a circular layout), Assembly graph, and Consensus (the actual assembly in the Fasta format).
++ This process may take time due to polishing. After all files are completed, you can use BioEdit for better visualization of the sequence alignment.
+  
+### 4. Quality Assessment Tool for Genome Assemblies (Can only be used when the assembly is done)
++ Tool: Quast (Source: https://academic.oup.com/bioinformatics/article/34/13/i142/5045727). This tool assesses the general quality of the assembly, such as length, GC content, etc. The difference with the Flye tool is that Flye does not provide GC content.
++ It is better to use Quast when you are running your sequence against a reference genome because you want to see if there are any duplications.
+  
+### 5. Identifying species using sketch
++ Tool: Sketch (Source: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0185056). This tool is used to identify the genome species. It is a quick and dirty version of BLAST. It will also identify the closest ANI that matches your sample.
++ With this tool, you need to use the assembly from Flye.
++ Navigate to the Sketch Database and enter "Refseq." Then, for Output format, choose "Default format with per query header line; one column header line; and one reference line per hit." Additionally, for "Only report records with at least this many hits," enter "3."
++ After the task is finished, you will have the ID of your organism in the chart under "Taxname," such as "Salmonella enterica subsp. enterica serovar Heidelberg."
 
-### 3. De novo assembler for single molecule sequencing reads 
-+ Tool: Flye (Sources: https://www.pnas.org/doi/full/10.1073/pnas.1604560113, https://github.com/mikolmogorov/Flye) This tools is to select parameters for high qulaity ONT reads and additional polishing ierations.
-+ Input Fastq files
-+ Navigate to Mode and enter "Nano HQ (--nano-hq) and for Number of polishing iterations enter "4"
-+ Tools output: This will generate 4 different output files: Assembly info (General info such as how many contigs you have total, length..etc), Graphical fragment assembly (similar to bandage, with circle layout), Assembly graph, Consensus (The actualy assembly in the Fasta format)
-+ This process may take long due to polishing. After all files are completed, you can use Bioedit to have a better visualization of the sequence alignment
+### 6. Scans genomes against PubMLST schemes
++ Tool: MLST (Source: https://github.com/tseemann/mlst)
++ With this tool, you need to use the assembly from Flye.
 
-### 4. Quality Assessment Tool for Genome Assemblies( Can only be use when the assembly is done)
-+ Tool: Quast (Source: https://academic.oup.com/bioinformatics/article/34/13/i142/5045727) This tool assess the of the general quality of the assembly such as the length, GC content..etc. the different with the Flye tool is that Flye does not tell you the GC content.
-+ It is better to use Quast when you are running your sequence agaisnt against  a reference because you want to se if therea are any duplications.
+### 7. NCBI AMRFinderPlus - requires data_manager_amrfinderplus
++ Tool: amrfinderplus_db (Source: https://www.biorxiv.org/content/10.1101/550707v1)
++ With this tool, you need to use the assembly from Flye.
++ Since at this point you already know the ID of your Organism you can make your selection in the drop down bar for "Get organism-specific results"
++ Toggle on "Add the plus genes to the report". This will give you the stress genes and virulence genes
+
+### 8. Perform serotyping of Escherichia coli Test
++ Tool: E coli Serotyper (Source: https://journals.asm.org/doi/10.1128/jcm.00008-15)
++ With this tool, you need to use the assembly from Flye.
+
 
 
 
