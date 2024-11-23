@@ -12,8 +12,22 @@ The objective of this project is to perform ONT (Oxford Nanopore Technologies) d
 
 
 ### 1. Create a new history/ workspace
-Log into GalaxyTrakr, "Upload Data" or Click "Share Data" & "Data Libraries"
++ Log into GalaxyTrakr, "Upload Data" or Click "Share Data" & "Data Libraries"
 
-If the data was shared with you you can search for it using the search bar
++ If the data was shared with you you can search for it using the search bar. Select all of the baracodes that you want to upload and "Export to History" as a "Datasets" (You are uploading Fast.q files)
 
-You are uploading Fast.q files 
+### 2. Filter long reads by quality. 
++ Tool: Filtlong (Source: https://github.com/rrwick/Filtlong) This Tool is to Remove the worst 5% reads and reads below 1000bp  and to downsample the reads to ~100X coverage of the genome. (Ex: if 6 Mb then down sample to 600Mb)
++ Input Fastq files using single dataset for multiple datasets
++ Navigate to "Output thresholds" and enter in, for example:  "600000000" for Total bases an "95" for Keep percentage (to keep 95 percentage of the data, but it is commone to do 90 percent also, which means you are throwing away 10 percentage of data) and "1000" for Min. length (keeping any reads that is above 1,000 only).
++ Theoretically you should use the estimate size for your organism. And if your cover is 65X, it will not be affected
+
+
+
+
+
+
+
+
+
+
