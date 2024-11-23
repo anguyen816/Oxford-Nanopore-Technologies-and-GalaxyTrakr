@@ -57,7 +57,7 @@ The objective of this project is to perform ONT (Oxford Nanopore Technologies) d
 + Similarly, for Salmonella you would use the tool: SeqSero2 (Source: https://github.com/CFSAN-Biostatistics/SeqSero2-galaxy)
 
 
-## 9. Prokaryotic genome annotation (Optional)
+### 9. Prokaryotic genome annotation (Optional)
 + Tool: Prokka (Source: https://academic.oup.com/bioinformatics/article/30/14/2068/2390517)
 + With this tool, you need to use the assembly from Flye.
 + Under "Analysis mode", choose "allele mode" and for "Algorith for BWA mapping", choose "mem"
