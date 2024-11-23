@@ -53,6 +53,20 @@ The objective of this project is to perform ONT (Oxford Nanopore Technologies) d
 ### 8. Perform serotyping of Escherichia coli Test
 + Tool: E coli Serotyper (Source: https://journals.asm.org/doi/10.1128/jcm.00008-15)
 + With this tool, you need to use the assembly from Flye.
++ Under "Are the input files FastQ or Contigs" Choose "Contigs"
++ Similarly, for Salmonella you would use the tool: SeqSero2 (Source: https://github.com/CFSAN-Biostatistics/SeqSero2-galaxy)
+
+
+## 9. Prokaryotic genome annotation (Optional)
++ Tool: Prokka (Source: https://academic.oup.com/bioinformatics/article/30/14/2068/2390517)
++ With this tool, you need to use the assembly from Flye.
++ Under "Analysis mode", choose "allele mode" and for "Algorith for BWA mapping", choose "mem"
++ Navigate to "Locus tag prefix", enter in " N" then under "Force GenBank/ENA/DDJB compliance" choose yes. Genus and Species name fields are optional. Lastly, under "Additional output" only select "Standard GenBank file. If the input was a multi-FASTA, then this will be a multi-GenBank, with one record for each sequence (.gbk)"
+
+## Galaxytrakr ONT Workflow
+Essentially, you can analyze your sample(s) by combining all the steps listed above using the workflow. (this workflow doesn not contain "Prokka")
++ Navigate to "Shared Data", choose "Workflow" search for "Nanopore Datasets-QC_assembly_profiling_salmonella". Click the drop down button and select "import"
++ Toggle yes for " Send results to a new history" and youcan give a "history name"
 
 
 
