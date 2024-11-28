@@ -1,0 +1,2 @@
+Sample name	Output directory	Input files	O antigen prediction	H1 antigen prediction(fliC)	H2 antigen prediction(fljB)	Predicted identification	Predicted antigenic profile	Predicted serotype	Note
+Flye_on_data_17:_consensus.fasta	/data/job_working_directory_s3/003/246/3246669/working/output	Flye_on_data_17:_consensus.fasta	4	r	1,2	Salmonella enterica subspecies enterica (subspecies I)	4:r:1,2	Heidelberg	

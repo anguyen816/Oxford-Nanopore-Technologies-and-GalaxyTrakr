@@ -1,0 +1,15 @@
+E coli Serotyper v1.2
+
+Tool versions
+=============
+
+
+SeroTyper
+=========
+blastn: 2.7.1+
+ Package: blast 2.7.1, build Sep 20 2018 02:20:26
+parameters: evalue=0.001, strand=both, dust=yes, max_target_seqs=10, perc_identity=95.0
+
+Statens Serum Institut & Technical University of Denmark
+O type database: v20160606
+H type database: v20160606
